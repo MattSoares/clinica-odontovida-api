@@ -9,7 +9,10 @@ async function login(req, res) {
             return res.status(400).json({ mensagem: 'Email e senha são obrigatórios' });
         }
 
-        const usuario = await Usuario.findOne({ email });
+        const usuario = await Usuario.findOne({
+            email,
+            ativo: true,
+        });
 
         if (!usuario) {
             return res.status(401).json({ mensagem: 'Email ou senha inválidos' });
